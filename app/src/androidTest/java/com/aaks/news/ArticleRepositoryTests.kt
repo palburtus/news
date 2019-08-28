@@ -20,20 +20,34 @@ import org.junit.Before
 @RunWith(AndroidJUnit4::class)
 class ArticleRepositoryTests {
 
+    private lateinit var articleToCreate: Article
     private lateinit var articleToGet: Article
     private lateinit var articleToUpdate: Article
     private lateinit var articleToDelete: Article
 
     @Before
     fun setUp(){
+
+        articleToCreate = buildArticle("create")
         articleToGet = buildArticle("get")
         articleToUpdate = buildArticle("update")
         articleToDelete = buildArticle("delete")
+
+        val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
+
+        savedArticleDbHelper.delete(articleToCreate.url)
+        savedArticleDbHelper.delete(articleToGet.url)
+        savedArticleDbHelper.delete(articleToUpdate.url)
+        savedArticleDbHelper.delete(articleToDelete.url)
+
+        articleToGet = savedArticleDbHelper.create(articleToGet)
+        articleToUpdate = savedArticleDbHelper.create(articleToUpdate)
+        articleToDelete = savedArticleDbHelper.create(articleToDelete)
     }
 
     @Test
     fun create_insertsArticleAsARowIntoDbReturnsArticle() {
-        
+
         val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
 
         var article = buildArticle("create")
@@ -42,6 +56,57 @@ class ArticleRepositoryTests {
 
         assertTrue(article.id != null)
         assertTrue(article.id!! >= 0)
+    }
+
+    @Test
+    fun get_readsOneArticleRowByUrl_returnsArticle() {
+
+        val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
+        val article = savedArticleDbHelper.get(articleToGet.url)
+
+        assertAreArticlesEqual(articleToGet, article!!)
+    }
+
+    @Test
+    fun get_readsAllRowsFromArticleTable_returnsListOfArticles() {
+
+        val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
+        val articles = savedArticleDbHelper.get()
+
+        assertEquals(6, articles.size)
+    }
+
+    @Test
+    fun update_changesTheValuesOfARowInTheDbByUrl_shouldSucceed(){
+
+        val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
+
+        val preUpdatedArticle = savedArticleDbHelper.get(articleToUpdate.url)
+        assertAreArticlesEqual(articleToUpdate, preUpdatedArticle!!)
+
+        articleToUpdate.title = "post update title"
+        articleToUpdate.description = "post update description"
+
+        val rowsAffected = savedArticleDbHelper.update(articleToUpdate)
+        assertEquals(1, rowsAffected)
+
+        val postUpdateArticle = savedArticleDbHelper.get(articleToUpdate.url)
+        assertAreArticlesEqual(articleToUpdate, postUpdateArticle!!)
+    }
+
+    @Test
+    fun delete_removesArticleRowFromDbByUrl_shouldSucceed(){
+
+        val savedArticleDbHelper = SavedArticleDbHelper(ApplicationProvider.getApplicationContext())
+
+        val preDeletedArtcle = savedArticleDbHelper.get(articleToDelete.url)
+        assertAreArticlesEqual(articleToDelete, preDeletedArtcle!!)
+
+        val rowsAffected = savedArticleDbHelper.delete(articleToDelete.url)
+        assertEquals(1, rowsAffected)
+
+        val deletedArtcle = savedArticleDbHelper.get(articleToDelete.url)
+        assertNull(deletedArtcle)
     }
 
     fun assertAreArticlesEqual(expected: Article, actual: Article){

@@ -3,6 +3,7 @@ package com.aaks.news.dal
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.BaseColumns
 import com.aaks.news.model.Article
 
 class SavedArticleDbHelper(context: Context) : SQLiteOpenHelper(context, ArticleDbConstants.DATABASE_NAME, null, DATABASE_VERSION), IArticleRepository {
@@ -20,27 +21,77 @@ class SavedArticleDbHelper(context: Context) : SQLiteOpenHelper(context, Article
     }
 
     override fun create(article: Article) : Article {
-        var db = this.writableDatabase
+        val db = this.writableDatabase
         article.id = db.insert(ArticleDbConstants.ARTICLE_TABLE_NAME, null, article.buildContentValues())
         db.close()
 
         return article
     }
 
-    override fun get(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun get(url: String) : Article? {
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM ${ArticleDbConstants.ARTICLE_TABLE_NAME} WHERE URL = \"$url\"", null)
+
+        if(cursor != null && cursor.moveToFirst()){
+
+            db.close()
+
+            return Article(
+                cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.URL)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.TITLE)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.DESCRIPTION)))
+        }
+
+        db.close()
+
+        return null
     }
 
     override fun get(): List<Article> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM ${ArticleDbConstants.ARTICLE_TABLE_NAME}", null)
+
+        var articles = mutableListOf<Article>()
+
+        while(cursor != null && cursor.moveToNext()){
+
+            val article = Article(
+                cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.URL)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.TITLE)),
+                cursor.getString(cursor.getColumnIndex(ArticleDbConstants.DESCRIPTION)))
+
+            articles.add(article)
+
+        }
+
+        db.close()
+        return articles
     }
 
-    override fun update(article: Article) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun update(article: Article): Int {
+
+        val db = this.writableDatabase
+        val whereClause = "${ArticleDbConstants.URL} = \"${article.url}\""
+
+        val rowsAffected = db.update(ArticleDbConstants.ARTICLE_TABLE_NAME, article.buildContentValues(), whereClause, null)
+        db.close()
+
+        return rowsAffected
     }
 
-    override fun delete(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun delete(url: String): Int {
+
+        val db = this.writableDatabase
+        val whereClause = "${ArticleDbConstants.URL} = \"$url\""
+
+        val rowsAffected = db.delete(ArticleDbConstants.ARTICLE_TABLE_NAME, whereClause, null)
+        db.close()
+
+        return rowsAffected
     }
 
 

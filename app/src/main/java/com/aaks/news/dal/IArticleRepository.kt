@@ -5,8 +5,8 @@ import com.aaks.news.model.Article
 interface IArticleRepository {
 
     fun create(article: Article) : Article
-    fun get(url: String)
+    fun get(url: String) : Article?
     fun get() : List<Article>
-    fun update(article: Article)
-    fun delete(url: String)
+    fun update(article: Article) : Int
+    fun delete(url: String) : Int
 }
