@@ -1,16 +1,18 @@
-package com.aaks.news.dal
+package com.aaks.news.dal.sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import com.aaks.news.dal.ArticleDbConstants
+import com.aaks.news.dal.IArticleRepository
+import com.aaks.news.dal.buildContentValues
 import com.aaks.news.model.Article
 
-class SavedArticleDbHelper(context: Context) : SQLiteOpenHelper(context, ArticleDbConstants.DATABASE_NAME, null, DATABASE_VERSION), IArticleRepository {
-
-    companion object {
-        val DATABASE_VERSION = 1
-    }
+class ArticleDbHelper(context: Context) : SQLiteOpenHelper(context,
+    ArticleDbConstants.DATABASE_NAME, null,
+    ArticleDbConstants.DATABASE_VERSION
+), IArticleRepository {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(ArticleDbConstants.ARTICLE_SQL_CREATE)
@@ -20,12 +22,12 @@ class SavedArticleDbHelper(context: Context) : SQLiteOpenHelper(context, Article
 
     }
 
-    override fun create(article: Article) : Article {
+    override fun create(article: Article) : Long {
         val db = this.writableDatabase
-        article.id = db.insert(ArticleDbConstants.ARTICLE_TABLE_NAME, null, article.buildContentValues())
+        val id = db.insert(ArticleDbConstants.ARTICLE_TABLE_NAME, null, article.buildContentValues())
         db.close()
 
-        return article
+        return id
     }
 
     override fun get(url: String) : Article? {
@@ -83,16 +85,14 @@ class SavedArticleDbHelper(context: Context) : SQLiteOpenHelper(context, Article
         return rowsAffected
     }
 
-    override fun delete(url: String): Int {
+    override fun delete(article: Article): Int {
 
         val db = this.writableDatabase
-        val whereClause = "${ArticleDbConstants.URL} = \"$url\""
+        val whereClause = "${ArticleDbConstants.URL} = \"${article.url}\""
 
         val rowsAffected = db.delete(ArticleDbConstants.ARTICLE_TABLE_NAME, whereClause, null)
         db.close()
 
         return rowsAffected
     }
-
-
 }

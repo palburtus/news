@@ -7,7 +7,7 @@ import com.aaks.news.model.Article
 fun Article.buildContentValues() : ContentValues{
     var contentValues = ContentValues()
 
-    if(this.id != null) {
+    if(this.id >= 0) {
         contentValues.put(BaseColumns._ID, this.id)
     }
 
