@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import com.aaks.news.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -35,4 +35,6 @@ class MainActivity : AppCompatActivity() {
         textMessage = findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
+
+
 }
