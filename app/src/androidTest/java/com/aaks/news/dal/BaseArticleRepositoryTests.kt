@@ -13,6 +13,6 @@ abstract class BaseArticleRepositoryTests {
     }
 
     protected fun buildArticle(tag: String) : Article {
-        return Article(-1, "https://article${tag}.com", "$tag title", "$tag description")
+        return Article(0, "https://article${tag}.com", "$tag title", "$tag description")
     }
 }

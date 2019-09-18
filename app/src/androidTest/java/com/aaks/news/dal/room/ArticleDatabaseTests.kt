@@ -28,7 +28,12 @@ class ArticleDatabaseTests : BaseArticleRepositoryTests() {
         articleToDelete = buildArticle("delete")
 
         val db = Room.databaseBuilder(ApplicationProvider.getApplicationContext(),
-            ArticleDatabase::class.java, ArticleDbConstants.DATABASE_NAME).build()
+            ArticleDatabase::class.java, ArticleDbConstants.DATABASE_NAME).fallbackToDestructiveMigration().build()
+
+        val existingArticles = db.articleRepository().get();
+        for(a in existingArticles){
+            db.articleRepository().delete(a)
+        }
 
         db.articleRepository().delete(articleToCreate)
         db.articleRepository().delete(articleToGet)
@@ -72,7 +77,7 @@ class ArticleDatabaseTests : BaseArticleRepositoryTests() {
 
         val articles = db.articleRepository().get()
 
-        assertEquals(6, articles.size)
+        assertEquals(3, articles.size)
     }
 
     @Test
