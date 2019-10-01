@@ -1,12 +1,14 @@
 package com.aaks.news.subscriptions
 
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.TextView
 import android.os.Bundle
 import com.aaks.news.R
 import com.android.billingclient.api.*
 import java.util.*
+import android.util.Log
 
-class SubscribeActivity : AppCompatActivity()  , PurchasesUpdatedListener {
+class SubscribeActivity : AppCompatActivity(), PurchasesUpdatedListener {
     override fun onPurchasesUpdated(
         billingResult: BillingResult?,
         purchases: MutableList<Purchase>?
@@ -18,23 +20,28 @@ class SubscribeActivity : AppCompatActivity()  , PurchasesUpdatedListener {
         }
     }
 
+    lateinit private var textViewToken: TextView
     lateinit private var billingClient: BillingClient
 
     private fun handlePurchase(purchase: Purchase)
     {
         val token = purchase.purchaseToken
+        Log.d("Token!!!", token)
+        textViewToken.text = token;
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscribe)
 
+        textViewToken = findViewById(R.id.textViewToken);
+
         subscribe()
     }
 
     fun subscribe() {
 
-        billingClient = BillingClient.newBuilder(this.applicationContext).setListener(this).build()
+        billingClient = BillingClient.newBuilder(this.applicationContext).enablePendingPurchases().setListener(this).build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
                 if (billingResult.responseCode == 0) {
@@ -54,6 +61,8 @@ class SubscribeActivity : AppCompatActivity()  , PurchasesUpdatedListener {
                                         .build()
                                     val responseCode =
                                         billingClient.launchBillingFlow(this@SubscribeActivity, flowParams)
+
+
                                 }
                             }
                         }
