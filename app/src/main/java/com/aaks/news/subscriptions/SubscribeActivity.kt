@@ -9,26 +9,9 @@ import java.util.*
 import android.util.Log
 
 class SubscribeActivity : AppCompatActivity(), PurchasesUpdatedListener {
-    override fun onPurchasesUpdated(
-        billingResult: BillingResult?,
-        purchases: MutableList<Purchase>?
-    ) {
-        if (billingResult!!.responseCode == 0 && purchases != null) {
-            for (purchase in purchases) {
-                handlePurchase(purchase)
-            }
-        }
-    }
 
     lateinit private var textViewToken: TextView
     lateinit private var billingClient: BillingClient
-
-    private fun handlePurchase(purchase: Purchase)
-    {
-        val token = purchase.purchaseToken
-        Log.d("Token!!!", token)
-        textViewToken.text = token;
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +20,24 @@ class SubscribeActivity : AppCompatActivity(), PurchasesUpdatedListener {
         textViewToken = findViewById(R.id.textViewToken);
 
         subscribe()
+    }
+
+    override fun onPurchasesUpdated(
+        billingResult: BillingResult?,
+        purchases: MutableList<Purchase>?) {
+
+        if (billingResult!!.responseCode == 0 && purchases != null) {
+            for (purchase in purchases) {
+                handlePurchase(purchase)
+            }
+        }
+    }
+    
+    private fun handlePurchase(purchase: Purchase) {
+
+        val token = purchase.purchaseToken
+        Log.d("Token!!!", token)
+        textViewToken.text = token;
     }
 
     fun subscribe() {
