@@ -27,5 +27,5 @@ Amazon provides a [more in depth tutorial](https://docs.aws.amazon.com/lambda/la
 
 * Create an AWS lambda function
 * Create an Execution Role that give the function access to other AWS resources 
-* Create AWS Cognito identify pool for authentication
+* Create AWS Cognito identity pool for authentication
 
