@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.amazonaws.appsync'
+
+def awsPropertiesFile = rootProject.file("aws.properties")
+def awsProperties = new Properties()
+awsProperties.load(new FileInputStream(awsPropertiesFile))
 
 android {
     compileSdkVersion 28
@@ -15,6 +17,8 @@ android {
         versionCode 2
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "COGNITO_IDENTITY_POOL", awsProperties['COGNITO_IDENTITY_POOL'])
     }
     buildTypes {
         release {
@@ -39,6 +43,12 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation 'com.android.billingclient:billing:2.0.3'
+    implementation 'com.amazonaws:aws-android-sdk-core:2.15.+'
+    implementation 'com.amazonaws:aws-android-sdk-appsync:2.8.+'
+    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.8.+'
+    implementation 'com.amazonaws:aws-android-sdk-lambda:2.8.+'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'org.mockito:mockito-core:2.19.0'

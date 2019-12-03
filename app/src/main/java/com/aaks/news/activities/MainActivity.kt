@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var textMessage: TextView
     private lateinit var buttonSubscribe: Button
+    private lateinit var buttonSaved: Button
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -44,6 +45,12 @@ class MainActivity : AppCompatActivity(){
         buttonSubscribe = findViewById(R.id.button_subscribe)
         buttonSubscribe.setOnClickListener {
             val intent = Intent(applicationContext, SubscribeActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonSaved = findViewById(R.id.buttonSaved)
+        buttonSaved.setOnClickListener {
+            val intent = Intent(applicationContext, SavedActivity::class.java)
             startActivity(intent)
         }
 
