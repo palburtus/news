@@ -28,4 +28,9 @@ Amazon provides a [more in depth tutorial](https://docs.aws.amazon.com/lambda/la
 * Create an AWS lambda function
 * Create an Execution Role that give the function access to other AWS resources 
 * Create AWS Cognito identity pool for authentication
+* In the root directory of your app create a file named aws.properties
+** Add the following line to aws.properties and include your Cognito identity pool 
+```
+COGNITO_IDENTITY_POOL="<your_cognito_identity_pool>"
+```
 
