@@ -8,6 +8,10 @@ def awsPropertiesFile = rootProject.file("aws.properties")
 def awsProperties = new Properties()
 awsProperties.load(new FileInputStream(awsPropertiesFile))
 
+def estimotePropertiesFile = rootProject.file("estimote.properties")
+def estimoteProperties = new Properties()
+estimoteProperties.load(new FileInputStream(estimotePropertiesFile))
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -19,6 +23,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "COGNITO_IDENTITY_POOL", awsProperties['COGNITO_IDENTITY_POOL'])
+        buildConfigField("String", "ESTIMOTE_APP_ID", estimoteProperties['ESTIMOTE_APP_ID'])
+        buildConfigField("String", "ESTIMORE_APP_TOKEN", estimoteProperties['ESTIMORE_APP_TOKEN'])
     }
     buildTypes {
         release {
@@ -47,6 +53,9 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-appsync:2.8.+'
     implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.8.+'
     implementation 'com.amazonaws:aws-android-sdk-lambda:2.8.+'
+    implementation 'com.estimote:proximity-sdk:1.0.4'
+    implementation 'com.estimote:mustard:0.2.1'
+    implementation 'com.estimote:scanning-plugin:0.25.4'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     androidTestImplementation 'junit:junit:4.12'

@@ -29,8 +29,14 @@ Amazon provides a [more in depth tutorial](https://docs.aws.amazon.com/lambda/la
 * Create an Execution Role that give the function access to other AWS resources 
 * Create AWS Cognito identity pool for authentication
 * In the root directory of your app create a file named aws.properties
-** Add the following line to aws.properties and include your Cognito identity pool 
+** Add the following line to `aws.properties` and include your Cognito identity pool
 ```
 COGNITO_IDENTITY_POOL="<your_cognito_identity_pool>"
 ```
 
+## Estimote Beacon Integration
+In order to integrate with Estimotes Beacon platform add the file `estimote.properties` to the root of your project and add the following lines to it.
+```
+ESTIMOTE_APP_ID="<your_estimote_app_id>"
+ESTIMORE_APP_TOKEN="<your_estimote_app_token>"
+```
