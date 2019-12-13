@@ -42,7 +42,7 @@
                 android:parentActivityName=".activities.MainActivity"></activity>
 
         <activity
-                android:name=".geo.estimote.EstimoteActivity"
+                android:name=".activities.BeaconActivity"
                 android:parentActivityName=".activities.MainActivity"></activity>
 
     </application>

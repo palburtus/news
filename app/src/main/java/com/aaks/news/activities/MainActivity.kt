@@ -7,7 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import com.aaks.news.R
-import com.aaks.news.geo.estimote.EstimoteActivity
 import com.aaks.news.subscriptions.SubscribeActivity
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker
 
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity(){
 
         buttonGeo = findViewById(R.id.buttonGeo)
         buttonGeo.setOnClickListener {
-            val intent = Intent(applicationContext, EstimoteActivity::class.java)
+            val intent = Intent(applicationContext, BeaconActivity::class.java)
             startActivity(intent)
         }
 
