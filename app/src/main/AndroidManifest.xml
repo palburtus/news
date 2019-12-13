@@ -33,9 +33,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SavedActivity"></activity>
+        <activity
+                android:name=".activities.SavedActivity"
+                android:parentActivityName=".activities.MainActivity"></activity>
 
-        <activity android:name=".subscriptions.SubscribeActivity"></activity>
+        <activity
+                android:name=".subscriptions.SubscribeActivity"
+                android:parentActivityName=".activities.MainActivity"></activity>
+
+        <activity
+                android:name=".geo.estimote.EstimoteActivity"
+                android:parentActivityName=".activities.MainActivity"></activity>
 
     </application>
 

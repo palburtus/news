@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-            android:id="@+id/button_subscribe"
+            android:id="@+id/buttonSubscribe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Subscribe"
@@ -35,7 +35,16 @@
             android:text="Saved"
             android:layout_marginStart="14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_subscribe"/>
+            app:layout_constraintTop_toBottomOf="@+id/buttonSubscribe"/>
+
+    <Button
+            android:id="@+id/buttonGeo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Geo"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSaved"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"

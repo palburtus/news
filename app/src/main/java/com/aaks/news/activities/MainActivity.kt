@@ -7,13 +7,49 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import com.aaks.news.R
+import com.aaks.news.geo.estimote.EstimoteActivity
 import com.aaks.news.subscriptions.SubscribeActivity
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker
 
 class MainActivity : AppCompatActivity(){
 
     private lateinit var textMessage: TextView
     private lateinit var buttonSubscribe: Button
     private lateinit var buttonSaved: Button
+    private lateinit var buttonGeo: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+        //Helper class provided by estimote that handles runtime permissions
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        textMessage = findViewById(R.id.message)
+
+        buttonSubscribe = findViewById(R.id.buttonSubscribe)
+        buttonSubscribe.setOnClickListener {
+            val intent = Intent(applicationContext, SubscribeActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonSaved = findViewById(R.id.buttonSaved)
+        buttonSaved.setOnClickListener {
+            val intent = Intent(applicationContext, SavedActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonGeo = findViewById(R.id.buttonGeo)
+        buttonGeo.setOnClickListener {
+            val intent = Intent(applicationContext, EstimoteActivity::class.java)
+            startActivity(intent)
+        }
+
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -32,30 +68,4 @@ class MainActivity : AppCompatActivity(){
         }
         false
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_main)
-
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        textMessage = findViewById(R.id.message)
-
-        buttonSubscribe = findViewById(R.id.button_subscribe)
-        buttonSubscribe.setOnClickListener {
-            val intent = Intent(applicationContext, SubscribeActivity::class.java)
-            startActivity(intent)
-        }
-
-        buttonSaved = findViewById(R.id.buttonSaved)
-        buttonSaved.setOnClickListener {
-            val intent = Intent(applicationContext, SavedActivity::class.java)
-            startActivity(intent)
-        }
-
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-    }
-
-
 }
