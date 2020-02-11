@@ -32,39 +32,36 @@ class EstimoteZoneManager(val context: Context, val proximityListener: IProxmity
     }
 
 
-    override fun createZone(zoneName: String, tag: String, subscribedAttachments: Array<String>) {
+    override fun createZone() {
 
-        val conferenceRoomOneZone = ProximityZoneBuilder()
+        val zone = ProximityZoneBuilder()
             .forTag("office")
             .inNearRange()
             .onEnter { proximityZoneContext ->
 
-                var attachments = mutableMapOf<String, String>()
+                proximityZoneContext.attachments["location"]?.let {
+                    this.proximityListener.onZoneEntered(
+                        it, proximityZoneContext.attachments)
 
-                for (a in subscribedAttachments){
-                    attachments.put(a, proximityZoneContext.attachments[a]!!)
+                    Log.i(TAG, "Entered Zone ${proximityZoneContext.attachments["location"]}")
                 }
 
-                this.proximityListener.onZoneEntered(zoneName, attachments)
-
-                Log.i(TAG, "Entered Zone $zoneName")
             }
             .onExit {proximityZoneContext ->
 
-                var attachments = mutableMapOf<String, String>()
+                proximityZoneContext.attachments["location"]?.let {
+                    this.proximityListener.onZoneExited(
+                        it, proximityZoneContext.attachments)
 
-                for (a in subscribedAttachments){
-                    attachments.put(a, proximityZoneContext.attachments[a]!!)
+                    Log.i(TAG, "Exited Zone ${proximityZoneContext.attachments["location"]}")
                 }
-
-                this.proximityListener.onZoneExited(zoneName, attachments)
             }
             .onContextChange {
                 Log.i(TAG, "Proximity Zone Context has changed")
             }
             .build()
 
-            observationHandlers.add(proximityObserver.startObserving(conferenceRoomOneZone))
+            observationHandlers.add(proximityObserver.startObserving(zone))
 
     }
 

@@ -28,12 +28,15 @@ class BeaconActivity : AppCompatActivity(), IProxmityListner{
         RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(this, {
             this.zoneManager = EstimoteZoneManager(this, this)
         }, {
-
+            Log.d(TAG, "requirements wizard worked")
         }, {
             Log.d(TAG, "Required permission not found: $it")
         })
 
         locationTextView = findViewById(R.id.locationTextView)
+
+        zoneManager.createZone()
+
     }
 
     override fun onZoneEntered(zoneName: String, attachments: Map<String, String>) {
@@ -42,7 +45,7 @@ class BeaconActivity : AppCompatActivity(), IProxmityListner{
 
                 val roomName = attachments["RoomName"]
                 Toast.makeText(applicationContext, "You have entered $roomName", Toast.LENGTH_LONG).show()
-                locationTextView.text = "Current Location: $roomName"
+                locationTextView.text = "Current Location: $zoneName"
             }
         }
     }
@@ -53,7 +56,7 @@ class BeaconActivity : AppCompatActivity(), IProxmityListner{
 
                 val roomName = attachments["RoomName"]
                 Toast.makeText(applicationContext, "You are leaving $roomName", Toast.LENGTH_LONG).show()
-                locationTextView.text = "Last Location: $roomName"
+                locationTextView.text = "Last Location: $zoneName"
             }
         }
     }
