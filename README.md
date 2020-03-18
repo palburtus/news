@@ -22,7 +22,7 @@ ESTIMORE_APP_TOKEN="f690ade823f01384b44f36b4f435f5f6"
 To demonstrate configuring MVVM and Databinding we have created an activity named `ArticleActivity` and a corresponding layout file `activity_article.xml` that will natively render a news article.  We have also created a the class `ArticleViewModel` that will be used for the viewmodel of the `ArticleActivity` and `activity_article.xml` for databinding.  
 
 ### Gradle Setup
-First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. 
+First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. We are also going to have to add support for databinding. 
 
 In you `app.gradle` add the following.
 ```groovy
@@ -32,13 +32,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    dataBinding {
+      enabled = true
     }
     ****
 }
 ```
+
 
 Next we are going to have to add some dependencies to use MVVM with kotlin.  In your `project.gradle` file add the following dependencies.
 ```groovy
