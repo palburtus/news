@@ -19,7 +19,7 @@ ESTIMORE_APP_TOKEN="f690ade823f01384b44f36b4f435f5f6"
 ```
 
 ## MVVM and Databinding 
-
+To demonstrate configuring MVVM and Databinding we have created an activity named `ArticleActivity` and a corresponding layout file `activity_article.xml` that will natively render a news article.  We have also created a the class `ArticleViewModel` that will be used for the viewmodel of the `ArticleActivity` and `activity_article.xml` for databinding.  
 
 ## Migrating to Room
 In the gradle implementation of room, rooms version number must be equal to the 'androidx.archcore:core-runtime' version currently being used by the app.
