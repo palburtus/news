@@ -1,5 +1,26 @@
 # News Feed Style App for Implementing Android Features 
 
+## Compiling this App
+> *Note you must add some files in order to compile this application*
+
+### AWS Properties
+This app requires adding a file named `aws.properties` to the root folder in order to compile. This file contains private keys for using the AWS features in this app and this file should not be checked in.  You can however, use this app without AWS credentials by including a default `aws.properties` file.  Below is an example of a default version of that file that you can add to build the code.
+
+```javascript
+COGNITO_IDENTITY_POOL=""
+```
+
+### Estimote Properties
+This app requires adding a file named `estimote.properties` to the root folder in order to compile.  This file contains private keys for using the Estimote SDK and should not be checked in.  You can however, use this app without Estimote credentials by including a default `estimote.properties` file.  Below is an example of a default version of that file that you can add to build the code. 
+
+```javascript
+ESTIMOTE_APP_ID="hudson-st-office-demo-maa"
+ESTIMORE_APP_TOKEN="f690ade823f01384b44f36b4f435f5f6"
+```
+
+## MVVM and Databinding 
+
+
 ## Migrating to Room
 In the gradle implementation of room, rooms version number must be equal to the 'androidx.archcore:core-runtime' version currently being used by the app.
 
