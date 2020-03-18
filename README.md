@@ -21,6 +21,31 @@ ESTIMORE_APP_TOKEN="f690ade823f01384b44f36b4f435f5f6"
 ## MVVM and Databinding 
 To demonstrate configuring MVVM and Databinding we have created an activity named `ArticleActivity` and a corresponding layout file `activity_article.xml` that will natively render a news article.  We have also created a the class `ArticleViewModel` that will be used for the viewmodel of the `ArticleActivity` and `activity_article.xml` for databinding.  
 
+### Gradle Setup
+First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. 
+
+In you `app.gradle` add the following.
+```groovy
+android {
+    ****
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    ****
+}
+```
+
+Next we are going to have to add some dependencies to use MVVM with kotlin.  In your `project.gradle` file add the following dependencies.
+```groovy
+implementation 'androidx.activity:activity-ktx:1.1.0'
+implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+```
+
 ## Migrating to Room
 In the gradle implementation of room, rooms version number must be equal to the 'androidx.archcore:core-runtime' version currently being used by the app.
 
