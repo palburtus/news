@@ -14,7 +14,7 @@ class ArticleViewModel : ViewModel() {
     }
 
     fun setArticle(article: Article){
-        this.article.value = article
+        this.article.postValue(article)
     }
 
     fun getArticle(): LiveData<Article> {
@@ -23,7 +23,11 @@ class ArticleViewModel : ViewModel() {
 
     fun isTitleVisible() : Boolean{
 
-        if(article.value!!.title.isNullOrEmpty()){
+        if(article.value == null){
+            return false
+        }
+
+        if(article.value!!.title.isEmpty()){
             return false
         }
 
