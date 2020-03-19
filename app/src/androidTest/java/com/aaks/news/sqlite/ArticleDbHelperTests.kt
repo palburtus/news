@@ -1,13 +1,10 @@
-package com.aaks.news.dal.sqlite
+package com.aaks.news.sqlite
 
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.runner.AndroidJUnit4
-import com.aaks.news.dal.BaseArticleRepositoryTests
-import com.aaks.news.dal.sqlite.ArticleDbHelper
+import com.aaks.news.BaseArticleRepositoryTests
 import com.aaks.news.model.Article
 
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Before
@@ -17,7 +14,6 @@ import org.junit.Before
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
 class ArticleDbHelperTests : BaseArticleRepositoryTests(){
 
     private lateinit var articleToCreate: Article

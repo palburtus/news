@@ -1,17 +1,14 @@
-package com.aaks.news.dal.room
+package com.aaks.news.room
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.runner.AndroidJUnit4
 import com.aaks.news.dal.ArticleDbConstants
-import com.aaks.news.dal.BaseArticleRepositoryTests
+import com.aaks.news.BaseArticleRepositoryTests
 import com.aaks.news.model.Article
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class ArticleDatabaseTests : BaseArticleRepositoryTests() {
 
     private lateinit var articleToCreate: Article
@@ -51,7 +48,7 @@ class ArticleDatabaseTests : BaseArticleRepositoryTests() {
         val db = Room.databaseBuilder(ApplicationProvider.getApplicationContext(),
             ArticleDatabase::class.java, ArticleDbConstants.DATABASE_NAME).build()
 
-        var article = buildArticle("create")
+        val article = buildArticle("create")
 
         article.id = db.articleRepository().create(article)
 

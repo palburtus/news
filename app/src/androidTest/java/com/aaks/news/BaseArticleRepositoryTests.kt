@@ -1,4 +1,4 @@
-package com.aaks.news.dal
+package com.aaks.news
 
 import com.aaks.news.model.Article
 import org.junit.Assert

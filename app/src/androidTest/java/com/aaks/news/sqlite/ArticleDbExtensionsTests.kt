@@ -1,15 +1,12 @@
-package com.aaks.news.dal.sqlite
+package com.aaks.news.sqlite
 
 import android.provider.BaseColumns
-import androidx.test.runner.AndroidJUnit4
 import com.aaks.news.dal.ArticleDbConstants
 import com.aaks.news.dal.buildContentValues
 import com.aaks.news.model.Article
 import org.junit.Assert.*
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class ArticleDbExtensionsTests {
 
     @Test

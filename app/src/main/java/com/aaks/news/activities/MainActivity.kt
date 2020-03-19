@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var buttonSubscribe: Button
     private lateinit var buttonSaved: Button
     private lateinit var buttonGeo: Button
+    private lateinit var buttonArticle: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,12 @@ class MainActivity : AppCompatActivity(){
         buttonGeo = findViewById(R.id.buttonGeo)
         buttonGeo.setOnClickListener {
             val intent = Intent(applicationContext, BeaconActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonArticle = findViewById(R.id.buttonArticle)
+        buttonArticle.setOnClickListener {
+            val intent = Intent(applicationContext, ArticleActivity::class.java)
             startActivity(intent)
         }
 

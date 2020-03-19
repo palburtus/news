@@ -1,4 +1,4 @@
-package com.aaks.news.dal.sqlite
+package com.aaks.news.sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

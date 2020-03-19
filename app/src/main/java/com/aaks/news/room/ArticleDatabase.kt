@@ -1,9 +1,7 @@
-package com.aaks.news.dal.room
+package com.aaks.news.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.aaks.news.dal.ArticleDbConstants
 import com.aaks.news.dal.IArticleRepository
 import com.aaks.news.model.Article
