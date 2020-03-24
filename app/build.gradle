@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
     //kotlin live data
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'

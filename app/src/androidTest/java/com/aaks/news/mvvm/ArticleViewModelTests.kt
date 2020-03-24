@@ -12,9 +12,19 @@ class ArticleViewModelTests {
     val rule = InstantTaskExecutorRule()
 
     @Test
+    fun isTitleVisible_articleIsNull_returnsFalse(){
+
+        val articleViewModel = ArticleViewModel()
+        articleViewModel.setArticle(null)
+
+        assertFalse(articleViewModel.isTitleVisible())
+    }
+
+    @Test
     fun isTitleVisible_titleIsEmpty_returnsFalse(){
 
         val article = Article(0, "", "", "")
+
         val articleViewModel = ArticleViewModel()
         articleViewModel.setArticle(article)
 
@@ -22,20 +32,44 @@ class ArticleViewModelTests {
     }
 
     @Test
-    fun isTitleVisible_articleIsNull_returnsFalse(){
+    fun isTitleVisible_titleIsNotEmpty_returnTrue(){
 
-        val articleViewModel = ArticleViewModel()
+        val article = Article(0, "", "something", "")
 
-        assertFalse(articleViewModel.isTitleVisible())
-    }
-
-    @Test
-    fun isTitleVisible_titleIsNotEmpty_returnsTrue(){
-
-        val article = Article(0, "", "Hello", "")
         val articleViewModel = ArticleViewModel()
         articleViewModel.setArticle(article)
 
         assertTrue(articleViewModel.isTitleVisible())
+    }
+
+    @Test
+    fun isDescriptionVisible_articleIsNull_returnsFalse(){
+
+        val articleViewModel = ArticleViewModel()
+        articleViewModel.setArticle(null)
+
+        assertFalse(articleViewModel.isDescriptionVisible())
+    }
+
+    @Test
+    fun isDescriptionVisible_titleIsEmpty_returnsFalse(){
+
+        val article = Article(0, "", "", "")
+
+        val articleViewModel = ArticleViewModel()
+        articleViewModel.setArticle(article)
+
+        assertFalse(articleViewModel.isDescriptionVisible())
+    }
+
+    @Test
+    fun isDescriptionVisible_titleIsNotEmpty_returnTrue(){
+
+        val article = Article(0, "", "", "some description")
+
+        val articleViewModel = ArticleViewModel()
+        articleViewModel.setArticle(article)
+
+        assertTrue(articleViewModel.isDescriptionVisible())
     }
 }
