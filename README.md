@@ -42,12 +42,12 @@ android {
 }
 ```
 
-##MVVM and ViewBinding
+## MVVM and ViewBinding
 To demonstrate configuration of MVVM and ViewBinding we have create an activity named `ViewBindingActivity` and a corresponding layout xml file `activity_view_binding.xml` that will natively render our sample UI. We are going to use Espresso framework for testing the UI which uses ViewBinding. The tests for the both Activities are located under androidTest package in the class named `ViewBindingActivityTest`.
 ###### For more information on ViewBinding please refer to
  * https://developer.android.com/topic/libraries/view-binding
 ###### For more information about UI testing with Espresso please refer to
-    1.  https://developer.android.com/training/testing/espresso
+    1. https://developer.android.com/training/testing/espresso
     2. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
     3. https://developer.android.com/training/basics/fragments/testing
     4. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
