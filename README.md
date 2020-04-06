@@ -47,10 +47,10 @@ To demonstrate configuration of MVVM and ViewBinding we have create an activity 
 ###### For more information on ViewBinding please refer to
  * https://developer.android.com/topic/libraries/view-binding
 ###### For more information about UI testing with Espresso please refer to
-    *. https://developer.android.com/training/testing/espresso
-    *. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
-    *. https://developer.android.com/training/basics/fragments/testing
-    *. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
+    1. https://developer.android.com/training/testing/espresso
+    2. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
+    3. https://developer.android.com/training/basics/fragments/testing
+    4. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
 ### Gradle Setup
 First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. We are also going to have to add support for viewbinding.
 
