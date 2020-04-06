@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Note that we do not have <layout> block wrapping the whole layout, since ViewBinding doesn't require
+annotation to bind the UI components. However ViewBinding doesn't support two-way databinding as DataBinding does,
+but it compiles faster than Databinding and removes the boilerplate code of using findViewById-->
+
+<!-- For the sake of this tutorial, we are going to use LinearLayout, although in real project please use ConstraintLayout since it's part of Jetpack -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ViewBindingActivity">
+
+
+    <EditText
+        android:id="@+id/inputField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/changeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button" />
+
+    <Button
+        android:id="@+id/switchActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Text" />
+
+</LinearLayout>

@@ -19,7 +19,7 @@ ESTIMORE_APP_TOKEN="f690ade823f01384b44f36b4f435f5f6"
 ```
 
 ## MVVM and Databinding 
-To demonstrate configuring MVVM and Databinding we have created an activity named `ArticleActivity` and a corresponding layout file `activity_article.xml` that will natively render a news article.  We have also created a the class `ArticleViewModel` that will be used for the viewmodel of the `ArticleActivity` and `activity_article.xml` for databinding.  
+To demonstrate configuring MVVM and Databinding we have created an activity named `ArticleActivity` and a corresponding layout file `activity_article.xml` that will natively render a news article.We have also created a the class `ArticleViewModel` that will be used for the viewmodel of the `ArticleActivity` and `activity_article.xml` for databinding.
 
 ### Gradle Setup
 First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. We are also going to have to add support for databinding. 
@@ -42,6 +42,50 @@ android {
 }
 ```
 
+##MVVM and ViewBinding
+To demonstrate configuration of MVVM and ViewBinding we have create an activity named `ViewBindingActivity` and a corresponding layout xml file `activity_view_binding.xml` that will natively render our sample UI. We are going to use Espresso framework for testing the UI which uses ViewBinding. The tests for the both Activities are located under androidTest package in the class named `ViewBindingActivityTest`.
+###### For more information on ViewBinding please refer to
+ * https://developer.android.com/topic/libraries/view-binding
+###### For more information about UI testing with Espresso please refer to
+    1.  https://developer.android.com/training/testing/espresso
+    2. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
+    3. https://developer.android.com/training/basics/fragments/testing
+    4. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
+### Gradle Setup
+First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. We are also going to have to add support for viewbinding.
+
+In you `app.gradle` add the following.
+```groovy
+android {
+    ****
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    viewBinding {
+      enabled = true
+    }
+    ****
+}
+```
+##Espresso setup
+Add Espresso dependencies in your build.gradle (Module:app)
+```groovy
+ // Android runner and rules support
+    androidtestImplementation 'com.android.support.test:runner:$latest_version_test_runner'
+    androidtestImplementation 'com.android.support.test:rules:$latest_version_test_runner'
+    // Espresso support
+        androidtestImplementation('com.android.support.test.espresso:espresso-core:$latest_version_espresso', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+
+        // add this for intent mocking support
+        androidtestImplementation 'com.android.support.test.espresso:espresso-intents:$latest_version_espresso'
+```
+######Note: Some of these dependencies may already be present in your gradle, so just add the ones missing
 
 Next we are going to have to add some dependencies to use MVVM with kotlin.  In your `project.gradle` file add the following dependencies.
 ```groovy

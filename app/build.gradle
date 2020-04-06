@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.amazonaws.appsync'
+//apply plugin: 'com.amazonaws.appsync'
 
-def awsPropertiesFile = rootProject.file("aws.properties")
-def awsProperties = new Properties()
-awsProperties.load(new FileInputStream(awsPropertiesFile))
+//def awsPropertiesFile = rootProject.file("aws.properties")
+//def awsProperties = new Properties()
+//awsProperties.load(new FileInputStream(awsPropertiesFile))
 
-def estimotePropertiesFile = rootProject.file("estimote.properties")
-def estimoteProperties = new Properties()
-estimoteProperties.load(new FileInputStream(estimotePropertiesFile))
+//def estimotePropertiesFile = rootProject.file("estimote.properties")
+//def estimoteProperties = new Properties()
+//estimoteProperties.load(new FileInputStream(estimotePropertiesFile))
 
 android {
     compileSdkVersion 28
@@ -21,10 +21,10 @@ android {
         versionCode 2
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "COGNITO_IDENTITY_POOL", awsProperties['COGNITO_IDENTITY_POOL'])
-        buildConfigField("String", "ESTIMOTE_APP_ID", estimoteProperties['ESTIMOTE_APP_ID'])
-        buildConfigField("String", "ESTIMORE_APP_TOKEN", estimoteProperties['ESTIMORE_APP_TOKEN'])
+//
+//        buildConfigField("String", "COGNITO_IDENTITY_POOL", awsProperties['COGNITO_IDENTITY_POOL'])
+//        buildConfigField("String", "ESTIMOTE_APP_ID", estimoteProperties['ESTIMOTE_APP_ID'])
+//        buildConfigField("String", "ESTIMORE_APP_TOKEN", estimoteProperties['ESTIMORE_APP_TOKEN'])
     }
     buildTypes {
         release {
@@ -35,14 +35,19 @@ android {
     dataBinding {
         enabled = true
     }
+    viewBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
+//    kotlinOptions {
+//        jvmTarget = "1.8" JavaVersion.VERSION_1_8.toString()
+//    }
+// To inline the bytecode built with JVM target 1.8 into
+// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 }
 
 dependencies {
@@ -62,6 +67,8 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:2.2.5"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
 

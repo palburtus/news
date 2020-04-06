@@ -27,28 +27,28 @@ class SavedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        cognitoCachingCredentialsProvider = CognitoCachingCredentialsProvider(
-            applicationContext,
-            BuildConfig.COGNITO_IDENTITY_POOL,
-            Regions.US_EAST_2)
-
-        lambdaInvokerFactory = LambdaInvokerFactory.builder().context(applicationContext).region(Regions.US_EAST_2).credentialsProvider(cognitoCachingCredentialsProvider).build()
-
-        val lambdaSavedInterface = lambdaInvokerFactory.build(ISavedLambdaProxy::class.java)
-
-        val article = Article(1, "https://www.alburt.us/article1", "Some Title", "Longer description")
-
-        thread(start = true) {
-            // Invoke "echo" method.  In case it fails, it will throw an exception
-            try {
-                val response: String = lambdaSavedInterface.AndroidBackendLambdaFunction(article)
-                runOnUiThread {
-                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
-                }
-            } catch (ex: LambdaFunctionException) {
-                Log.e("SavedActivity", "Lambda execution failed")
-            }
-        }
+//        cognitoCachingCredentialsProvider = CognitoCachingCredentialsProvider(
+//            applicationContext,
+//            BuildConfig.COGNITO_IDENTITY_POOL,
+//            Regions.US_EAST_2)
+//
+//        lambdaInvokerFactory = LambdaInvokerFactory.builder().context(applicationContext).region(Regions.US_EAST_2).credentialsProvider(cognitoCachingCredentialsProvider).build()
+//
+//        val lambdaSavedInterface = lambdaInvokerFactory.build(ISavedLambdaProxy::class.java)
+//
+//        val article = Article(1, "https://www.alburt.us/article1", "Some Title", "Longer description")
+//
+//        thread(start = true) {
+//            // Invoke "echo" method.  In case it fails, it will throw an exception
+//            try {
+//                val response: String = lambdaSavedInterface.AndroidBackendLambdaFunction(article)
+//                runOnUiThread {
+//                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+//                }
+//            } catch (ex: LambdaFunctionException) {
+//                Log.e("SavedActivity", "Lambda execution failed")
+//            }
+//        }
 
 
     }
