@@ -47,10 +47,10 @@ To demonstrate configuration of MVVM and ViewBinding we have create an activity 
 ###### For more information on ViewBinding please refer to
  * https://developer.android.com/topic/libraries/view-binding
 ###### For more information about UI testing with Espresso please refer to
-    1. https://developer.android.com/training/testing/espresso
-    2. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
-    3. https://developer.android.com/training/basics/fragments/testing
-    4. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
+    *. https://developer.android.com/training/testing/espresso
+    *. https://developer.android.com/training/testing/ui-testing/espresso-testing#kotlin
+    *. https://developer.android.com/training/basics/fragments/testing
+    *. https://www.vogella.com/tutorials/AndroidTestingEspresso/article.html
 ### Gradle Setup
 First we are going to have to add support for Java 8 and configure Kotlin to target that JVM version. We are also going to have to add support for viewbinding.
 
@@ -71,7 +71,7 @@ android {
     ****
 }
 ```
-##Espresso setup
+## Espresso setup
 Add Espresso dependencies in your build.gradle (Module:app)
 ```groovy
  // Android runner and rules support
@@ -85,7 +85,7 @@ Add Espresso dependencies in your build.gradle (Module:app)
         // add this for intent mocking support
         androidtestImplementation 'com.android.support.test.espresso:espresso-intents:$latest_version_espresso'
 ```
-######Note: Some of these dependencies may already be present in your gradle, so just add the ones missing
+###### Note: Some of these dependencies may already be present in your gradle, so just add the ones missing
 
 Next we are going to have to add some dependencies to use MVVM with kotlin.  In your `project.gradle` file add the following dependencies.
 ```groovy
